@@ -23,15 +23,15 @@ const atRules = {
     return neatGrid.pad(padding, options, media);
   },
   'row' (display, media) {
-    return neatGrid.row(display, options, media);
+    return neatGrid.row(display, options, media );
   },
-  'shift' (columns, containerColumns, direction, media) {
+  'shift' (columns, containerColumns, media, direction) {
     return neatGrid.shift(columns, containerColumns, direction, options, media);
   },
-  'show-grid' (columns, containerColumns, location, direction, media) {
+  'show-grid' (columns, containerColumns, media, location, direction) {
     return neatGrid.showGrid(columns, containerColumns, location, direction, options, media);
   },
-  'span-columns' (columns, containerColumns, display, direction, media) {
+  'span-columns' (columns, containerColumns, display, media, direction) {
     return neatGrid.spanColumns(columns, containerColumns, display, direction, options, media);
   }
 };
@@ -55,6 +55,10 @@ const getGlobalSelector = (node) => {
 };
 
 const applyRuleSetToNode = (ruleSet, node, currentAtRule) => {
+  
+  console.log('currentAtRule', currentAtRule);
+  console.log('atRule', atRules);
+  
   Object.keys(ruleSet).forEach((prop) => {
     let rule = ruleSet[prop];
     if (typeof rule === 'object') {
