@@ -2,6 +2,7 @@
 
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
+import Media from '../core/mediaTypes.es6';
 
 // Makes an element a outer container by centring it in the viewport, clearing its floats, and setting its `max-width`.
 // Although optional, using `outer-container` is recommended. The mixin can be called on more than one element per page,
@@ -34,8 +35,8 @@ import functions from '../core/functions.es6.js';
 //   }
 //
 
-let outerContainer = (maxWidth, options = variables) => {
-  maxWidth = maxWidth || options.neatMaxWidth;
+let outerContainer = (maxWidth, options = variables, media) => {
+  maxWidth = maxWidth || (media ? options[media].neatMaxWidth : options[Media.Desktop].neatMaxWidth);
 
   return Object.assign({
     'max-width': maxWidth,

@@ -2,6 +2,7 @@
 
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
+import Media from '../core/mediaTypes.es6';
 
 // Creates a debugging grid for the parent of columns. Works in conjunction with `@neat-outer-container`.
 //
@@ -56,23 +57,27 @@ const generateArray = (length = 0) => {
   return Array.from(new Array(length), (x, i) => i);
 };
 
-let showGrid = (columns, containerColumns, location, direction, options = variables) => {
-  columns = columns || options.neatElementColumns;
-  containerColumns = containerColumns || options.neatGridColumns;
-  location = location || options.debugGridLocation;
-  direction = direction || options.neatDefaultDirection;
+let showGrid = (columns, containerColumns, location, direction, options = variables, media) => {
+  columns = columns || (media ? options[media].neatElementColumns : options[Media.Desktop].neatElementColumns);
+  containerColumns = containerColumns || (media ? options[media].neatGridColumns : options[Media.Desktop].neatGridColumns); 
+  location = location || (media ? options[media].debugGridLocation : options[Media.Desktop].debugGridLocation);
+  direction = direction || (media ? options[media].neatDefaultDirection : options[Media.Desktop].neatDefaultDirection);
+  
+  let neatColumnWidth = (media ? options[media].neatColumnWidth : options[Media.Desktop].neatColumnWidth);
+  let neatGutterWidth = (media ? options[media].neatGutterWidth : options[Media.Desktop].neatGutterWidth);
+  let debugGridColor = (media ? options[media].debugGridColor : options[Media.Desktop].debugGridColor);
 
   let columnsCount = +(containerColumns / columns);
   let directions = functions.getDirection(direction);
-  let columnWidth = functions.flexWidth(columns, containerColumns, options.neatColumnWidth, options.neatGutterWidth);
-  let columnGutter = functions.flexGutter(containerColumns, options.neatColumnWidth, options.neatGutterWidth);
+  let columnWidth = functions.flexWidth(columns, containerColumns, neatColumnWidth, neatGutterWidth);
+  let columnGutter = functions.flexGutter(containerColumns, neatColumnWidth, neatGutterWidth);
 
   let gradient = generateArray(columnsCount).reduce((memo, idx) => {
     let startColor = columnWidth * idx + columnGutter * idx;
     let endColor = columnWidth * (idx + 1) + columnGutter * idx;
     let startBlank = endColor;
     let endBlank = columnWidth * (idx + 1) + columnGutter * (idx + 1);
-    memo.push(`${options.debugGridColor} ${functions.percentage(startColor)}, ${options.debugGridColor} ${functions.percentage(endColor)}`);
+    memo.push(`${debugGridColor} ${functions.percentage(startColor)}, ${debugGridColor} ${functions.percentage(endColor)}`);
     if (idx < columnsCount - 1) {
       memo.push(`transparent ${functions.percentage(startBlank)}, transparent ${functions.percentage(endBlank)}`);
     }

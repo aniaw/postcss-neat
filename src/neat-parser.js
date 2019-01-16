@@ -13,26 +13,26 @@ const atRules = {
   'fill-parent' () {
     return neatGrid.fillParent(options);
   },
-  'omega' (query, direction) {
-    return neatGrid.omega(query, direction, options);
+  'omega' (query, direction, media) {
+    return neatGrid.omega(query, direction, options, media);
   },
-  'outer-container' (maxWidth) {
-    return neatGrid.outerContainer(maxWidth, options);
+  'outer-container' (maxWidth, media) {
+    return neatGrid.outerContainer(maxWidth, options, media);
   },
-  'pad' (...padding) {
-    return neatGrid.pad(padding, options);
+  'pad' (media, ...padding) {
+    return neatGrid.pad(padding, options, media);
   },
-  'row' (display) {
-    return neatGrid.row(display, options);
+  'row' (display, media) {
+    return neatGrid.row(display, options, media);
   },
-  'shift' (columns, containerColumns, direction) {
-    return neatGrid.shift(columns, containerColumns, direction, options);
+  'shift' (columns, containerColumns, direction, media) {
+    return neatGrid.shift(columns, containerColumns, direction, options, media);
   },
-  'show-grid' (columns, containerColumns, location, direction) {
-    return neatGrid.showGrid(columns, containerColumns, location, direction, options);
+  'show-grid' (columns, containerColumns, location, direction, media) {
+    return neatGrid.showGrid(columns, containerColumns, location, direction, options, media);
   },
-  'span-columns' (columns, containerColumns, display, direction) {
-    return neatGrid.spanColumns(columns, containerColumns, display, direction, options);
+  'span-columns' (columns, containerColumns, display, direction, media) {
+    return neatGrid.spanColumns(columns, containerColumns, display, direction, options, media);
   }
 };
 

@@ -3,6 +3,7 @@
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
 import fillParent from './fill-parent.es6.js';
+import Media from '../core/mediaTypes.es6';
 
 // Designates the element as a row of columns in the grid layout. It clears the floats on the element and
 // sets its display property. Rows can't be nested, but there can be more than one row element
@@ -37,9 +38,9 @@ import fillParent from './fill-parent.es6.js';
 // }
 //
 
-let row = (display, options = variables) => {
-  display = display || options.neatDefaultDisplay;
-
+let row = (display, options = variables, media) => {
+  display = display || (media ? options[media].neatDefaultDisplay : options[Media.Desktop].neatDefaultDisplay);
+  
   if (display === 'table') {
     return Object.assign({
       'display': 'table',

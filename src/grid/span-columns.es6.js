@@ -2,6 +2,7 @@
 
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
+import Media from '../core/mediaTypes.es6';
 
 // Specifies the number of columns an element should span. If the selector is nested the number of columns
 // of its parent element should be passed as an argument as well.
@@ -54,15 +55,18 @@ import functions from '../core/functions.es6.js';
 //   }
 //
 
-let spanColumns = (columns, containerColumns, display, direction, options = variables) => {
-  columns = columns || options.neatElementColumns;
-  containerColumns = containerColumns || options.neatGridColumns;
-  display = display || options.neatDefaultDisplay;
-  direction = direction || options.neatDefaultDirection;
+let spanColumns = (columns, containerColumns, display, direction, options = variables, media) => {
+  columns = columns || (media ? options[media].neatElementColumns : options[Media.Desktop].neatElementColumns);
+  containerColumns = containerColumns || (media ? options[media].neatGridColumns : options[Media.Desktop].neatGridColumns);
+  display = display || (media ? options[media].neatDefaultDisplay : options[Media.Desktop].neatDefaultDisplay);
+  direction = direction || (media ? options[media].neatDefaultDirection : options[Media.Desktop].neatDefaultDirection);
+
+  let neatColumnWidth = (media ? options[media].neatColumnWidth : options[Media.Desktop].neatColumnWidth);
+  let neatGutterWidth = (media ? options[media].neatGutterWidth : options[Media.Desktop].neatGutterWidth);
 
   let directions = functions.getDirection(direction);
-  let columnWidth = functions.flexWidth(columns, containerColumns, options.neatColumnWidth, options.neatGutterWidth);
-  let columnGutter = functions.flexGutter(containerColumns, options.neatColumnWidth, options.neatGutterWidth);
+  let columnWidth = functions.flexWidth(columns, containerColumns, neatColumnWidth, neatGutterWidth);
+  let columnGutter = functions.flexGutter(containerColumns, neatColumnWidth, neatGutterWidth);
 
   if (display === 'table') {
     return {

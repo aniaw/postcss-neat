@@ -5,7 +5,7 @@ const locals = {
   goldenRatio: 1.618
 };
 
-let variables = {
+const options = {
   // Sets the default display mode. Can be `block`, `table` or `block-collapse`.
   neatDefaultDisplay: 'block',
 
@@ -32,6 +32,15 @@ let variables = {
 
   // Sets the default location of the debugging grid.
   debugGridLocation: 'after'
+}
+
+let variables = {
+  desktop : {...options},
+  tablet: {...options},
+  phone: {...options}
+
 };
 
 export default variables;
+
+

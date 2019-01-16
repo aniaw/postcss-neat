@@ -2,6 +2,7 @@
 
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
+import Media from '../core/mediaTypes.es6';
 
 // Adds padding to the element.
 //
@@ -20,8 +21,14 @@ import functions from '../core/functions.es6.js';
 //   }
 //
 
-let pad = (padding = 'default', options = variables) => {
-  let columnGutter = functions.percentage(functions.flexGutter(options.neatGridColumns, options.neatColumnWidth, options.neatGutterWidth));
+let pad = (padding = 'default', options = variables, media) => {
+  let columnGutter = functions.percentage(
+    functions.flexGutter(
+      (media ? options[media].neatGridColumns : options[Media.Desktop].neatGridColumns),
+      (media ? options[media].neatColumnWidth : options[Media.Desktop].neatColumnWidth),
+      (media ? options[media].neatGutterWidth : options[Media.Desktop].neatGutterWidth),
+    )
+  );
   let parts = Array.isArray(padding) ? padding : padding.split(' ');
 
   if (!parts.length) {

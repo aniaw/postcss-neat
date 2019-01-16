@@ -2,6 +2,7 @@
 
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
+import Media from '../core/mediaTypes.es6';
 
 // Translates an element horizontally by a number of columns, in a specific nesting context.
 //
@@ -33,10 +34,11 @@ import functions from '../core/functions.es6.js';
 //   }
 //
 
-let shift = (columns, containerColumns, direction, options = variables) => {
-  containerColumns = containerColumns || options.neatGridColumns;
-  direction = direction || options.neatDefaultDirection;
-
+let shift = (columns, containerColumns, direction, options = variables, media) => {
+  
+  containerColumns = containerColumns ||(media ? options[media].neatGridColumns : options[Media.Desktop].neatGridColumns);
+  direction = direction || (media ? options[media].neatDefaultDirection : options[Media.Desktop].neatDefaultDirection);
+  
   let directions = functions.getDirection(direction);
   let columnWidth = functions.flexWidth(1, containerColumns, options.neatColumnWidth, options.neatGutterWidth);
   let columnGutter = functions.flexGutter(containerColumns, options.neatColumnWidth, options.neatGutterWidth);

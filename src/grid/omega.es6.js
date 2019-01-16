@@ -2,6 +2,7 @@
 
 import variables from '../core/variables.es6.js';
 import functions from '../core/functions.es6.js';
+import Media from '../core/mediaTypes.es6.js';
 
 // Removes the element's gutter margin, regardless of its position in the grid hierarchy or display property.
 // It can target a specific element, or every `nth-child` occurrence. Works only with `block` layouts.
@@ -48,8 +49,8 @@ import functions from '../core/functions.es6.js';
 //   }
 //
 
-let omega = (query, direction, options = variables) => {
-  direction = direction || options.neatDefaultDirection;
+let omega = (query, direction, options = variables, media) => {
+  direction = direction || (media ? options[media].neatDefaultDirection : options[Media.Desktop].neatDefaultDirection);
 
   let directions = functions.getDirection(direction);
   if (!query) {
