@@ -56,9 +56,6 @@ const getGlobalSelector = (node) => {
 
 const applyRuleSetToNode = (ruleSet, node, currentAtRule) => {
   
-  console.log('currentAtRule', currentAtRule);
-  console.log('atRule', atRules);
-  
   Object.keys(ruleSet).forEach((prop) => {
     let rule = ruleSet[prop];
     if (typeof rule === 'object') {

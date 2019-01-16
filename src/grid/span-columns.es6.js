@@ -56,11 +56,12 @@ import Media from '../core/mediaTypes.es6';
 //
 
 let spanColumns = (columns, containerColumns, display, direction, options = variables, media) => {
+
   columns = columns || (media ? options[media].neatElementColumns : options[Media.Desktop].neatElementColumns);
   containerColumns = containerColumns || (media ? options[media].neatGridColumns : options[Media.Desktop].neatGridColumns);
   display = display || (media ? options[media].neatDefaultDisplay : options[Media.Desktop].neatDefaultDisplay);
   direction = direction || (media ? options[media].neatDefaultDirection : options[Media.Desktop].neatDefaultDirection);
-
+  
   let neatColumnWidth = (media ? options[media].neatColumnWidth : options[Media.Desktop].neatColumnWidth);
   let neatGutterWidth = (media ? options[media].neatGutterWidth : options[Media.Desktop].neatGutterWidth);
 
